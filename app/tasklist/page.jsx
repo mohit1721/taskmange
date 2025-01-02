@@ -1,6 +1,4 @@
-
 'use client'
-
 import React, { Suspense, useState, useEffect } from 'react';
 import {  useSelector } from 'react-redux';
 import { getTaskLists } from '@/services/operations/taskAPI';
@@ -13,7 +11,7 @@ import Link  from 'next/link';
 import Tabs from '@/components/Tabs';
 // import { Suspense } from 'react'
 
-const TaskList = () => {
+const TaskListContent = () => {
     const [tasks, setTasks] = useState([]);
     const searchParams = useSearchParams();
     const pathname = usePathname();
@@ -294,5 +292,10 @@ console.log("token in tasklist page", token);
        
     );
 };
+const TaskList = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <TaskListContent />
+  </Suspense>
+);
 
 export default TaskList;
