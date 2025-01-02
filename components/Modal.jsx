@@ -66,42 +66,6 @@ console.log("token in modal", token)
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault(); // ✅ Prevent default form submission behavior
-
-  //   if (!title.trim()) {
-  //     alert('Title is required.');
-  //     return;
-  //   }
-
-  //   const newTask = {
-  //     title,
-  //     priority,
-  //     status,
-  //     startTime,
-  //     endTime,
-  //   };
-  //   const toastId = toast.loading("Loading...")
-
-  //   try {
-  //     const response = await createTask(newTask, token);
-
-  //     console.log("createdTask from BE [after FE call] " , response)
-  //     if (response?.success) {
-  //       onSubmit(newTask); // ✅ Pass newTask to the parent component
-  //       handleClose();
-  //       router.push('/tasklist')
-  //     } else {
-  //       console.error('Error creating task:', response);
-  //     }
-  //   } catch (error) {
-  //     console.error('Unexpected error:', error);
-  //   }
-  //   finally{
-  //     toast.dismiss(toastId)
-  //   }
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault(); // ✅ Prevent default form submission behavior
   
   //   if (!title.trim()) {
   //     alert('Title is required.');

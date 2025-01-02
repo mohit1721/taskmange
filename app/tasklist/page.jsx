@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import {  useSelector } from 'react-redux';
 import { getTaskLists } from '@/services/operations/taskAPI';
 import TaskCard from '@/components/TaskCard';
@@ -11,7 +11,7 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import Link  from 'next/link';
 // import { logout } from '@/services/operations/authAPI';
 import Tabs from '@/components/Tabs';
-import { Suspense } from 'react'
+// import { Suspense } from 'react'
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
@@ -168,27 +168,12 @@ console.log("token in tasklist page", token);
     
     return (
 
-<Suspense>
+<Suspense fallback={<div>Loading Task List...</div>}>
 <div className="container mx-auto p-11 h-full">
        
        <Tabs
      tab1Text="Dashboard"
      tab2Text="Task List"
-     content1={
-       <div>
-         {/* <h1 className="text-2xl font-bold mb-4 text-[#6557f7]">Dashboard</h1> */}
-         {/* Dashboard content goes here */}
-         <Link href='/dashboard' />
-       </div>
-     }
-     content2={
-       <div>
-         {/* <h1 className="text-2xl font-bold mb-4 text-[#6557f7]">Task List</h1> */}
-         {/* Task List content goes here */}
-         <Link href='/tasklist' />
-
-       </div>
-     }
      router={router}
    />
        <button 

@@ -5,7 +5,7 @@ import { Suspense } from 'react'
 import { logout } from '@/services/operations/authAPI';
 // import { useRouter } from 'next/navigation';
 
-const Tabs = ({ tab1Text, tab2Text, content1, content2, router }) => {
+const Tabs = ({ tab1Text, tab2Text, router }) => {
   const [activeTab, setActiveTab] = useState('tab1'); // Default active tab
     // const router = useRouter()
   const handleTabClick = (tab) => {
@@ -21,7 +21,7 @@ const Tabs = ({ tab1Text, tab2Text, content1, content2, router }) => {
   };
 
   return (
-    <Suspense>
+    <Suspense fallback={<div>Loading Tabs...</div>}>
   <div>
       {/* Tab Navigation */}
       <div className='flex flex-row justify-between mb-20'>
@@ -51,8 +51,6 @@ const Tabs = ({ tab1Text, tab2Text, content1, content2, router }) => {
         </button>
       </div>
 
-      {/* Content Rendering Based on Active Tab */}
-      {activeTab === 'tab1' ? content1 : content2}
     </div>
     </Suspense>
   
