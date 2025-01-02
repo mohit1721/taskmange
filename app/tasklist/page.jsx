@@ -2,7 +2,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { getTaskLists } from '@/services/operations/taskAPI';
 import TaskCard from '@/components/TaskCard';
 import TaskModal from '../../components/Modal'; // Import the TaskModal component
@@ -11,6 +11,7 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import Link  from 'next/link';
 // import { logout } from '@/services/operations/authAPI';
 import Tabs from '@/components/Tabs';
+import { Suspense } from 'react'
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
@@ -167,143 +168,145 @@ console.log("token in tasklist page", token);
     
     return (
 
-
-        <div className="container mx-auto p-11 h-full">
+<Suspense>
+<div className="container mx-auto p-11 h-full">
        
-        <Tabs
-      tab1Text="Dashboard"
-      tab2Text="Task List"
-      content1={
-        <div>
-          {/* <h1 className="text-2xl font-bold mb-4 text-[#6557f7]">Dashboard</h1> */}
-          {/* Dashboard content goes here */}
-          <Link href='/dashboard' />
-        </div>
-      }
-      content2={
-        <div>
-          {/* <h1 className="text-2xl font-bold mb-4 text-[#6557f7]">Task List</h1> */}
-          {/* Task List content goes here */}
-          <Link href='/tasklist' />
+       <Tabs
+     tab1Text="Dashboard"
+     tab2Text="Task List"
+     content1={
+       <div>
+         {/* <h1 className="text-2xl font-bold mb-4 text-[#6557f7]">Dashboard</h1> */}
+         {/* Dashboard content goes here */}
+         <Link href='/dashboard' />
+       </div>
+     }
+     content2={
+       <div>
+         {/* <h1 className="text-2xl font-bold mb-4 text-[#6557f7]">Task List</h1> */}
+         {/* Task List content goes here */}
+         <Link href='/tasklist' />
 
-        </div>
-      }
-      router={router}
-    />
-        <button 
-              onClick={handleOpenAddTaskModal}
+       </div>
+     }
+     router={router}
+   />
+       <button 
+             onClick={handleOpenAddTaskModal}
 
-        className="bg-blue-500 hover:bg-blue-700 text-white w-fit font-bold py-2 px-4 rounded mb-4">+ Add task</button>
+       className="bg-blue-500 hover:bg-blue-700 text-white w-fit font-bold py-2 px-4 rounded mb-4">+ Add task</button>
 
-        <div className="flex justify-end mb-4">
-        <div className="relative ml-2">
-        <select 
-            name="sortBy" 
-            // value={filters.sortBy} 
-            value={`${filters.sortBy}_${filters.order}`}  // Combining sortBy and order for selected value
+       <div className="flex justify-end mb-4">
+       <div className="relative ml-2">
+       <select 
+           name="sortBy" 
+           // value={filters.sortBy} 
+           value={`${filters.sortBy}_${filters.order}`}  // Combining sortBy and order for selected value
 
-            onChange={handleFilterChange} 
-            className="border p-2 rounded"
-        >
-            <option value="createdAt_desc">Sort By</option>
-            <option value="startTime_asc">Start Time: Asc</option>
-            <option value="startTime_desc">Start Time: Desc</option>
-            <option value="endTime_asc">End Time: Asc</option>
-            <option value="endTime_desc">End Time: Desc</option>
-            <option value="updatedAt_desc">Last Updated: Desc</option> {/* ✅ Default */}
-        <option value="updatedAt_asc">Last Updated: Asc</option>
-        <option value="createdAt_desc">Created At: Desc</option>
-        <option value="createdAt_asc">Created At: Asc</option>
-        </select>
-    </div>
+           onChange={handleFilterChange} 
+           className="border p-2 rounded"
+       >
+           <option value="createdAt_desc">Sort By</option>
+           <option value="startTime_asc">Start Time: Asc</option>
+           <option value="startTime_desc">Start Time: Desc</option>
+           <option value="endTime_asc">End Time: Asc</option>
+           <option value="endTime_desc">End Time: Desc</option>
+           <option value="updatedAt_desc">Last Updated: Desc</option> {/* ✅ Default */}
+       <option value="updatedAt_asc">Last Updated: Asc</option>
+       <option value="createdAt_desc">Created At: Desc</option>
+       <option value="createdAt_asc">Created At: Asc</option>
+       </select>
+   </div>
 
-            <div className="relative ml-2">
+           <div className="relative ml-2">
 
-            <select 
-  name="priority" 
-  value={filters.priority} 
-  onChange={handleFilterChange} 
-  className="border p-2 rounded"
+           <select 
+ name="priority" 
+ value={filters.priority} 
+ onChange={handleFilterChange} 
+ className="border p-2 rounded"
 >
-  <option value="all">All Priorities</option>
-  {[1, 2, 3, 4, 5].map(p => (
-    <option key={p} value={p}>Priority {p}</option>
-  ))}
-  <option value="all">Remove Filter</option>
+ <option value="all">All Priorities</option>
+ {[1, 2, 3, 4, 5].map(p => (
+   <option key={p} value={p}>Priority {p}</option>
+ ))}
+ <option value="all">Remove Filter</option>
 </select>
 
-            </div>
+           </div>
 
-          <div className="relative ml-2">
-          <select name="status" value={filters.status} onChange={handleFilterChange} className="border p-2 rounded">
-          
-          <option value="pending">Pending</option>
-          <option value="finished">Finished</option>
-          <option value="all">All Statuses</option>
-        </select>
-              </div>
+         <div className="relative ml-2">
+         <select name="status" value={filters.status} onChange={handleFilterChange} className="border p-2 rounded">
+         
+         <option value="pending">Pending</option>
+         <option value="finished">Finished</option>
+         <option value="all">All Statuses</option>
+       </select>
+             </div>
 
-        </div>
+       </div>
 
-        <div>
-      {loading ? ( // ✅ Show loading spinner if data is being fetched
-        <div className="text-center text-blue-500 font-semibold">
-          Loading tasks...
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {tasks && tasks.length > 0 ? (
-            tasks.map(task => (
-              <TaskCard key={task._id} task={task} />
-            ))
-          ) : (
-            <div className="text-center mx-auto text-red-500">
-              No Tasks
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-      
+       <div>
+     {loading ? ( // ✅ Show loading spinner if data is being fetched
+       <div className="text-center text-blue-500 font-semibold">
+         Loading tasks...
+       </div>
+     ) : (
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+         {tasks && tasks.length > 0 ? (
+           tasks.map(task => (
+             <TaskCard key={task._id} task={task} />
+           ))
+         ) : (
+           <div className="text-center mx-auto text-red-500">
+             No Tasks
+           </div>
+         )}
+       </div>
+     )}
+   </div>
+     
 {/* pagination */}
-      
+     
 
-      <div className="flex justify-between items-center mt-4">
-        <button
-          onClick={() => handlePageChange(filters.page - 1)}
-          disabled={filters.page <= 1}
-          className="bg-blue-500 text-white w-fit px-4 py-2 rounded disabled:bg-gray-300"
-        >
-          Previous
-        </button>
-        <span>
-          Page {filters.page} of { totalPages}
-        </span>
-        <button
-          onClick={() => handlePageChange(filters.page + 1)}
-          disabled={filters.page >= totalPages}
-          className="bg-blue-500 w-fit text-white px-4 py-2 rounded disabled:bg-gray-300"
-        >
-          Next
-        </button>
-      </div>
+     <div className="flex justify-between items-center mt-4">
+       <button
+         onClick={() => handlePageChange(filters.page - 1)}
+         disabled={filters.page <= 1}
+         className="bg-blue-500 text-white w-fit px-4 py-2 rounded disabled:bg-gray-300"
+       >
+         Previous
+       </button>
+       <span>
+         Page {filters.page} of { totalPages}
+       </span>
+       <button
+         onClick={() => handlePageChange(filters.page + 1)}
+         disabled={filters.page >= totalPages}
+         className="bg-blue-500 w-fit text-white px-4 py-2 rounded disabled:bg-gray-300"
+       >
+         Next
+       </button>
+     </div>
 
 <div className='w-full flex justify-center'>
 <TaskModal 
-      
-      isOpen={isModalOpen} 
-      onClose={() => setIsModalOpen(false)} 
-      isEditMode={!!selectedTask} 
-      taskData={selectedTask} 
-      // onSubmit={!!selectedTask ? handleEditTask : handleAddTask} 
-      onSubmit={handleTaskSubmit} // Unified submit handler
-
-    />
-</div>
      
+     isOpen={isModalOpen} 
+     onClose={() => setIsModalOpen(false)} 
+     isEditMode={!!selectedTask} 
+     taskData={selectedTask} 
+     // onSubmit={!!selectedTask ? handleEditTask : handleAddTask} 
+     onSubmit={handleTaskSubmit} // Unified submit handler
+
+   />
+</div>
+    
 
 
-    </div>
+   </div>
+</Suspense>
+       
     );
 };
 
