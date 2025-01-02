@@ -11,7 +11,7 @@ console.log("token in private route ", token)
   useEffect(() => {
     if (!token) {
       // Redirect to login page if no token
-      router.push('/login');
+      router.push('/');
     } else {
       setLoading(false); // Set loading false once the token is verified
       router.push('/dashboard')
