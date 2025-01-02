@@ -13,6 +13,10 @@ pnpm dev
 # or
 bun dev
 ```
+##ENDPOINTS
+#/   -> [Home]
+#/dashboard
+#/tasklist
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
