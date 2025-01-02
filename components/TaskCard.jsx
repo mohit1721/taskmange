@@ -46,6 +46,7 @@ const handleDelete = async () => {
     }
 
 }
+
 // Function to close the modal
 const handleCloseModal = () => {
   setIsModalOpen(false);
