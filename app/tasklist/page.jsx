@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTaskLists } from '@/services/operations/taskAPI';
 import TaskCard from '@/components/TaskCard';
 import TaskModal from '../../components/Modal'; // Import the TaskModal component
-import {toast} from 'react-hot-toast'
+// import {toast} from 'react-hot-toast'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import Link  from 'next/link';
-import { logout } from '@/services/operations/authAPI';
+// import { logout } from '@/services/operations/authAPI';
 import Tabs from '@/components/Tabs';
 
 const TaskList = () => {

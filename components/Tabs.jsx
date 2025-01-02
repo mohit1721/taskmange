@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
+import { Suspense } from 'react'
+
 import { logout } from '@/services/operations/authAPI';
 // import { useRouter } from 'next/navigation';
 
@@ -19,7 +21,8 @@ const Tabs = ({ tab1Text, tab2Text, content1, content2, router }) => {
   };
 
   return (
-    <div>
+    <Suspense>
+  <div>
       {/* Tab Navigation */}
       <div className='flex flex-row justify-between mb-20'>
       <div className='flex flex-row justify-start gap-10'>
@@ -51,6 +54,8 @@ const Tabs = ({ tab1Text, tab2Text, content1, content2, router }) => {
       {/* Content Rendering Based on Active Tab */}
       {activeTab === 'tab1' ? content1 : content2}
     </div>
+    </Suspense>
+  
   );
 };
 
