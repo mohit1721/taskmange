@@ -128,7 +128,7 @@ const toastId = toast.loading("Loading...")
     
     const response = await apiConnector('PUT', `${EDIT_TASK_API}/${taskId}`, taskData);
     // console.log('Token in API Call [Edit task, token fe se be ja rh h???]:', token); // Ensure token is defined
-
+console.log("deleted res, ", response);
     if (!response?.data?.success) {
       throw new Error('Could not edit task');
     }
@@ -157,7 +157,7 @@ const toastId = toast.loading("Loading...")
 export const deleteTask = async (taskId) => {
   // console.log('Token in API Call (Delete Task):', token);
 
-  let result = null;
+  // let result = null;
 
   try {
     const response = await apiConnector('DELETE', `${DELETE_TASK_API}/${taskId}`);
@@ -167,10 +167,10 @@ export const deleteTask = async (taskId) => {
       throw new Error('Could not delete task');
     }
 
-    result = response?.deletedTask;
+    // result = response?.deletedTask;
     toast.success("Task deleted successfully");
-    console.log('Task Deleted Successfully:', result);
-    return result;
+    // console.log('Task Deleted Successfully:', result);
+    // return result;
   } catch (error) {
     console.error('DELETE_TASK_API ERROR:', error);
     // Optionally handle error UI feedback (e.g., toast notification)
