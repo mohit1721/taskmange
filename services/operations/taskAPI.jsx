@@ -153,29 +153,50 @@ const toastId = toast.loading("Loading...")
   // return result;
 };
 
+// export const deleteTask = async (taskId) => {
+//   // console.log('Token in API Call (Delete Task):', token);
+
+//   // let result = null;
+
+//   try {
+//     const response = await apiConnector('DELETE', `${DELETE_TASK_API}/${taskId}`);
+//     // console.log('Token in API Call [Delete task, token fe se be ja rh h???]:', token); // Ensure token is defined
+//     console.log("deleted res, ", response);
+
+//     if (!response?.deletedTask) {
+//       throw new Error('Could not delete task');
+//     }
+
+//     // result = response?.deletedTask;
+//     toast.success("Task deleted successfully");
+//     // console.log('Task Deleted Successfully:', result);
+//     // return result;
+//   } catch (error) {
+//     console.error('DELETE_TASK_API ERROR:', error);
+//     // Optionally handle error UI feedback (e.g., toast notification)
+//     toast.error('Failed to delete task');
+//   }
+
+//   // return result;
+// };
+
+
+
 export const deleteTask = async (taskId) => {
-  // console.log('Token in API Call (Delete Task):', token);
-
-  // let result = null;
-
   try {
     const response = await apiConnector('DELETE', `${DELETE_TASK_API}/${taskId}`);
-    // console.log('Token in API Call [Delete task, token fe se be ja rh h???]:', token); // Ensure token is defined
-    console.log("deleted res, ", response);
 
-    if (!response?.deletedTask) {
-      throw new Error('Could not delete task');
+    console.log("Deleted Task Response:", response);
+
+    // Check response success
+    if (!response?.success || !response?.deletedTask) {
+      throw new Error(response?.message || 'Could not delete task');
     }
 
-    // result = response?.deletedTask;
     toast.success("Task deleted successfully");
-    // console.log('Task Deleted Successfully:', result);
-    // return result;
+    return response.deletedTask;
   } catch (error) {
-    console.error('DELETE_TASK_API ERROR:', error);
-    // Optionally handle error UI feedback (e.g., toast notification)
-    toast.error('Failed to delete task');
+    console.error('DELETE_TASK_API ERROR:', error.message || error);
+    toast.error(error.message || 'Failed to delete task');
   }
-
-  // return result;
 };

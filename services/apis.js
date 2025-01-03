@@ -15,10 +15,4 @@ export const taskENDPOINTS={
     
 }
 
-// export const taskENDPOINTS = {
-//     CREATE_TASK_API: `${BASE_URL}/create-task`,
-//     EDIT_TASK_API: BASE_URL+"/task/:id",
-//     DELETE_TASK_API: BASE_URL+"/task/:id",
-//     GET_DASHBOARD_STATS_API: `${BASE_URL}/dashboard/stats`,
-//     GET_TASKSLISTS_API: `${BASE_URL}/tasklists`
-// };
+
