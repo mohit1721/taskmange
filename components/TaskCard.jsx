@@ -25,10 +25,7 @@ const handleEditClick = (task) => {
   setIsModalOpen(true); // Open the modal
   setIsEditMode(true);
 };
-const handleAddTask = (taskData) => {
-    console.log('Task Created:', taskData);
-    // Add task to the state or refresh the task list
-  };
+
   
 const taskId = task._id;//
 
@@ -36,17 +33,23 @@ const handleDelete = async () => {
     try {
         const taskId = task._id;//
         console.log("task Id: FE " + task._id);
-      const result = await deleteTask(taskId);
-      if (result) {
-        // Handle any additional UI updates after successful deletion
-        console.log('Task deleted successfully:', result);
-      }
-    } catch (error) {
-      console.error('Error deleting task:', error);
-    }
+       await deleteTask(taskId);
+       window.location.reload(); // This will reload the page
+
+    //   if (result) {
+    //     // Handle any additional UI updates after successful deletion
+    //     console.log('Task deleted successfully:', result);
+    //   }
+    // } catch (error) {
+    // }
 
 }
+catch(err)
+{
+      console.error('Error deleting task:', err);
 
+}
+}
 // Function to close the modal
 const handleCloseModal = () => {
   setIsModalOpen(false);

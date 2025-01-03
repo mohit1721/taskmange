@@ -194,7 +194,7 @@ export const deleteTask = async (taskId) => {
     }
 
     toast.success("Task deleted successfully");
-    return response.deletedTask;
+    // return response.deletedTask;
   } catch (error) {
     console.error('DELETE_TASK_API ERROR:', error.message || error);
     toast.error(error.message || 'Failed to delete task');
