@@ -29,11 +29,11 @@ const Login = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  console.log('Form Data:', formData);
+  // console.log('Form Data:', formData);
 
   try {
     const res = await login(formData.email, formData.password);
-    console.log("LOGIN API RESPONSE in login page:", res);
+    // console.log("LOGIN API RESPONSE in login page:", res);
 
     if (res?.success) {
       dispatch(setToken(res.token));
@@ -46,7 +46,7 @@ const handleSubmit = async (e) => {
       localStorage.setItem("token", JSON.stringify(res.token));
       localStorage.setItem("user", JSON.stringify(res.user));
 
-      console.log("Redirecting to dashboard...");
+      // console.log("Redirecting to dashboard...");
       router.push("/dashboard");
     } else {
       console.error("Login failed:", res?.message || "Unknown error");
@@ -56,10 +56,10 @@ const handleSubmit = async (e) => {
     console.error("Error during login:", error);
     toast.error("Login failed");
   } finally {
-    // setFormData({
-    //   email: '',
-    //   password: '',
-    // });
+    setFormData({
+      email: '',
+      password: '',
+    });
   }
 };
 

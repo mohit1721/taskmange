@@ -1,8 +1,7 @@
 'use client'
 import PrivateRoute from '@/components/PrivateRoute';
 import DashboardComp from '../../components/DashboardComp'
-// import Link from 'next/link';
-// import { logout } from '@/services/operations/authAPI';
+
 import { useRouter } from 'next/navigation';
 import Tabs from '@/components/Tabs';
 
@@ -30,6 +29,5 @@ export default function Dashboard() {
  
   );
 
-    // return <h1>Welcome to the User Dashboard!</h1>;
   }
   

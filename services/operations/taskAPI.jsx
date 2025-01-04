@@ -14,10 +14,8 @@ const {
 }= taskENDPOINTS
 
 
-// Backend Route (e.g., in `taskController.js`)
 export const getDashboardStats = async (token) => {
-  // const token = localStorage.getItem('token'); // Get the token from localStorage
-  // const token = useSelector((state) => state.auth.token); // Get token from Redux
+
 console.log("token in api call dasb", token)
   let result = "";
 
@@ -34,7 +32,7 @@ console.log("token in api call dasb", token)
     }
 
     result = response?.data;
-    console.log("Dashboard Stats Data:", result);
+    // console.log("Dashboard Stats Data:", result);
   } catch (error) {
     console.error("GET_DASHBOARD_STATS_API ERROR:", error);
     // Optionally handle error UI feedback (e.g., toast notification)
@@ -47,7 +45,7 @@ console.log("token in api call dasb", token)
 export const getTaskLists = async(token,{ priority, status, sortBy,order,limit, page })=>{
 
   let result="";
-console.log("token in getTaskLists fxn [api calling]", token)
+// console.log("token in getTaskLists fxn [api calling]", token)
   try {
     const params = {sortBy, order,priority, status, page ,limit};
 
@@ -67,7 +65,7 @@ console.log("token in getTaskLists fxn [api calling]", token)
     }
 
     result = response?.data;
-    console.log("Task lists Stats Data:", result);
+    // console.log("Task lists Stats Data:", result);
   } catch (error) {
     console.error("GET_TASKLISTS_STATS_API ERROR:", error);
     // Optionally handle error UI feedback (e.g., toast notification)
@@ -133,8 +131,7 @@ const toastId = toast.loading("Loading...")
     }
 
     result = response?.data?.data;
-    // toast.success("Task edited successfully");
-    // console.log('Task Edited Successfully:', result);
+
     return result;
   } catch (error) {
     console.error('EDIT_TASK_API ERROR:', error);
@@ -150,35 +147,7 @@ const toastId = toast.loading("Loading...")
     toast.dismiss(toastId)
   }
 
-  // return result;
 };
-
-// export const deleteTask = async (taskId) => {
-//   // console.log('Token in API Call (Delete Task):', token);
-
-//   // let result = null;
-
-//   try {
-//     const response = await apiConnector('DELETE', `${DELETE_TASK_API}/${taskId}`);
-//     // console.log('Token in API Call [Delete task, token fe se be ja rh h???]:', token); // Ensure token is defined
-//     console.log("deleted res, ", response);
-
-//     if (!response?.deletedTask) {
-//       throw new Error('Could not delete task');
-//     }
-
-//     // result = response?.deletedTask;
-//     toast.success("Task deleted successfully");
-//     // console.log('Task Deleted Successfully:', result);
-//     // return result;
-//   } catch (error) {
-//     console.error('DELETE_TASK_API ERROR:', error);
-//     // Optionally handle error UI feedback (e.g., toast notification)
-//     toast.error('Failed to delete task');
-//   }
-
-//   // return result;
-// };
 
 
 
@@ -186,17 +155,17 @@ export const deleteTask = async (taskId) => {
   try {
     const response = await apiConnector('DELETE', `${DELETE_TASK_API}/${taskId}`);
 
-    console.log("Deleted Task Response:", response);
+    // console.log("Deleted Task Response:", response?.data);
+// Check response success
+if (response?.data?.success && response?.data?.deletedTask) {
+  toast.success("Task deleted successfully");
+  return response.data.deletedTask; // Return deleted task if needed
+} else {
+  throw new Error(response?.data?.message || 'Could not delete task');
+}
 
-    // Check response success
-    if (!response?.success || !response?.deletedTask) {
-      throw new Error(response?.message || 'Could not delete task');
-    }
-
-    toast.success("Task deleted successfully");
-    // return response.deletedTask;
   } catch (error) {
-    console.error('DELETE_TASK_API ERROR:', error.message || error);
+    console.log('DELETE_TASK_API ERROR:', error.message || error);
     toast.error(error.message || 'Failed to delete task');
   }
 };

@@ -31,11 +31,11 @@ const SignInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    console.log('Form Data:', formData);
+    // console.log('Form Data:', formData);
   
     try {
       const res = await login(formData.email, formData.password);
-      console.log("LOGIN API RESPONSE in login page:", res);
+      // console.log("LOGIN API RESPONSE in login page:", res);
   
       if (res?.success) {
         dispatch(setToken(res.token));

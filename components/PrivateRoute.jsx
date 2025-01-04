@@ -7,7 +7,7 @@ const PrivateRoute = ({ children }) => {
   const token  = useSelector((state) => state.auth.token); // Get token from Redux
 
   const [loading, setLoading] = useState(true);
-console.log("token in private route ", token)
+// console.log("token in private route ", token)
   useEffect(() => {
     if (!token) {
       // Redirect to login page if no token

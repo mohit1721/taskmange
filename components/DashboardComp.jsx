@@ -12,14 +12,14 @@ export default function DashboardComp( ) {
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token); // Get token from Redux store
-console.log("token in dasboard", token)
+// console.log("token in dasboard", token)
   useEffect(() => {
 
     // Use an async function inside useEffect
     const fetchDashboardStats = async () => {
       try {
         const response = await getDashboardStats(token); // Fetch the data asynchronously
-        console.log("stats data final",response); // Log the response
+        // console.log("stats data final",response); // Log the response
 
         if (response) {
           // Map the backend response to the state variables

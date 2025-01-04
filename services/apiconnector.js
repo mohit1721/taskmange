@@ -1,62 +1,15 @@
-// import axios from "axios"
-// // #YEHI FILE FRONTEND+BACKEND KO CONNECT KR RHA H..USING AXIOS
-// export const axiosInstance = axios.create({});
-
-// export const apiConnector = (method, url, bodyData, headers, params) => {
-//    // Set default headers if none are passed
-//    const defaultHeaders = {
-//     'Content-Type': 'application/json', // Default to JSON content type
-//     ...headers, // Merge any custom headers passed to the function
-// };
-    // return axiosInstance({
-    //     method:`${method}`,
-    //     url:`${url}`,
-    //     data: bodyData ? bodyData : null,
-    //     headers: headers ? headers : defaultHeaders,
-    //     params : params ? params : null,
-    //     withCredentials: true, // Enable credentials for cross-origin requests
-    //     credentials: 'include', // This is important for sending cookies
-
-    //   })
-// }
-
-
-
-// ******
-
-
-// import axios from 'axios';
-
-// // Create a custom axios instance
-// export const axiosInstance = axios.create({});
-
-// export const apiConnector = (method, url, bodyData, headers = {}, params = null) => {
-//   // Set default headers if none are passed
-//   const defaultHeaders = {
-//     'Content-Type': 'application/json', // Default to JSON content type
-//     ...headers, // Merge any custom headers passed to the function
-//   };
-
-//   // Make the API call using axios
-//   return axiosInstance({
-//     method,          // HTTP method (GET, POST, etc.)
-//     url,             // URL for the request
-//     data: bodyData ? bodyData : null, // The request payload
-//     headers: defaultHeaders,  // The headers for the request
-//     params,          // Optional query parameters
-//     withCredentials: true, // Enable credentials (cookies) for cross-origin requests
-//   });
-// };
-
-
 
 // *****
 
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import store from '../lib/store'
 // Create a custom axios instance
-export const axiosInstance = axios.create({});
+export const axiosInstance = axios.create({
+  withCredentials: true, // Always include credentials for cross-origin requests
+
+
+});
 
 // Add a request interceptor to handle the token
 axiosInstance.interceptors.request.use(
@@ -88,14 +41,24 @@ export const apiConnector = (method, url, bodyData , headers, params ) => {
     ...headers, // Merge any custom headers passed to the function
 };
 
-  return axiosInstance({
-    method:`${method}`,
-    url:`${url}`,
-    data: bodyData ? bodyData : null,
-    headers: headers ? headers : defaultHeaders,
-    params : params ? params : null,
-    withCredentials: true, // Enable credentials for cross-origin requests
-    credentials: 'include', // This is important for sending cookies
+  // return axiosInstance({
+  //   method:`${method}`,
+  //   url:`${url}`,
+  //   data: bodyData ? bodyData : null,
+  //   headers: headers ? headers : defaultHeaders,
+  //   params : params ? params : null,
+  //   withCredentials: true, // Enable credentials for cross-origin requests
+  //   credentials: 'include', // This is important for sending cookies
 
-  })
+  // })
+  return axiosInstance({
+    method, // No need for string interpolation
+    url,
+    data: bodyData,
+    headers: defaultHeaders,
+    params,
+    withCredentials: true, // Ensure cookies and credentials are included
+  });
+
+
 };

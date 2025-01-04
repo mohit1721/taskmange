@@ -32,7 +32,7 @@ const TaskListContent = () => {
     const [loading, setLoading] = useState(true); // ✅ Loading state
 
     const token = useSelector((state) => state.auth.token); // Get token from Redux store
-console.log("token in tasklist page", token);
+// console.log("token in tasklist page", token);
      // Update URL when filters change
   useEffect(() => {
     const params = new URLSearchParams();
@@ -71,7 +71,7 @@ console.log("token in tasklist page", token);
 
           const response = await getTaskLists(token, cleanedParams);
   
-          console.log('All Tasks Data Final:', response);
+          // console.log('All Tasks Data Final:', response);
 
           setFinalTasks(response);
           setTasks(response?.tasks);

@@ -31,22 +31,15 @@ const taskId = task._id;//
 
 const handleDelete = async () => {
     try {
-        const taskId = task._id;//
-        console.log("task Id: FE " + task._id);
+        // const taskId = task._id;//
+        // console.log("task Id: FE " + task._id);
        await deleteTask(taskId);
        window.location.reload(); // This will reload the page
-
-    //   if (result) {
-    //     // Handle any additional UI updates after successful deletion
-    //     console.log('Task deleted successfully:', result);
-    //   }
-    // } catch (error) {
-    // }
 
 }
 catch(err)
 {
-      console.error('Error deleting task:', err);
+      console.log('Error deleting task:', err);
 
 }
 }
@@ -98,10 +91,7 @@ const handleCloseModal = () => {
   taskId={taskId}
   taskData={selectedTask} // Pass the selected task as prop
   onSubmit={selectedTask ? () => handleEditClick(task) : null}
-// onSubmit={selectedTask ? handleEditClick(task) : null}
 
-//   onSubmit={selectedTask ? handleEditClick(task) : null} // Use the appropriate function for edit or add
-//   token={token}
 />
         </div>
     );
