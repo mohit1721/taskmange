@@ -138,6 +138,8 @@ console.log("token in modal", token)
     try {
       if (isEditMode) {
         await editTask(taskId,taskDetails,setTasks); // Call API to edit task
+              window.location.reload(); // This will reload the page
+
         toast.success('Task updated successfully');
       } else {
         await createTask(taskDetails,setTasks); // Call API to create task
@@ -146,7 +148,7 @@ console.log("token in modal", token)
   
       onSubmit(taskDetails); // Call parent handler
       handleClose();
-      window.location.reload(); // This will reload the page
+      // window.location.reload(); // This will reload the page
 
     } catch (error) {
       console.error('Task operation failed:', error);
