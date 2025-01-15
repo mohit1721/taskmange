@@ -127,8 +127,8 @@ function TaskModal({  isOpen, onClose, isEditMode,taskId, taskData, onSubmit }) 
   }
     try {
       if (isEditMode) {
-         await editTask(taskId,taskDetails,setTasks); // Call API to edit task
-        window.location.reload();
+        await editTask(taskId,taskDetails,setTasks); // Call API to edit task
+              window.location.reload(); // This will reload the page
         toast.success('Task updated successfully');
       } else {
         console.log('Task Details:', taskDetails);
