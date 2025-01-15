@@ -48,7 +48,6 @@ const TaskListContent = () => {
 
   // Fetch tasks based on filters
 
-
     useEffect(() => {
       // Fetch task lists asynchronously
       const fetchTaskLists = async () => {
@@ -101,11 +100,7 @@ const TaskListContent = () => {
     setFilters((prev) => ({ ...prev, page: newPage }));
   };
 
-
-
-
   // 🛠️ Handle Filter Changes
- 
  
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -124,10 +119,7 @@ const TaskListContent = () => {
     });
   };
   
- 
     const totalPages = Math.ceil(totalTasks / filters.limit);
-
-
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
   
@@ -136,18 +128,7 @@ const TaskListContent = () => {
       setSelectedTask(null); // Clear any selected task
     };
 
-    const handleAddTask = (newTask) => {
-      // Assuming newTask comes with an id (you might need to generate it)
-      setTasks([...tasks, newTask]);
-      setIsModalOpen(false);
-    };
-    const handleEditTask = (updatedTask) => {
-      handleOpenAddTaskModal()
-      setTasks((prevTasks) =>
-        prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
-      );
-      setIsModalOpen(false);
-    };
+
     const handleTaskSubmit = async (task) => {
       if (selectedTask) {
         // Edit Task
@@ -195,9 +176,9 @@ const TaskListContent = () => {
            <option value="endTime_asc">End Time: Asc</option>
            <option value="endTime_desc">End Time: Desc</option>
            <option value="updatedAt_desc">Last Updated: Desc</option> {/* ✅ Default */}
-       <option value="updatedAt_asc">Last Updated: Asc</option>
-       <option value="createdAt_desc">Created At: Desc</option>
-       <option value="createdAt_asc">Created At: Asc</option>
+          <option value="updatedAt_asc">Last Updated: Asc</option>
+          <option value="createdAt_desc">Created At: Desc</option>
+          <option value="createdAt_asc">Created At: Asc</option>
        </select>
    </div>
 
@@ -279,7 +260,6 @@ const TaskListContent = () => {
      onClose={() => setIsModalOpen(false)} 
      isEditMode={!!selectedTask} 
      taskData={selectedTask} 
-     // onSubmit={!!selectedTask ? handleEditTask : handleAddTask} 
      onSubmit={handleTaskSubmit} // Unified submit handler
 
    />
@@ -299,3 +279,11 @@ const TaskList = () => (
 );
 
 export default TaskList;
+
+/*
+taskData={selectedTask}
+Purpose: This prop passes the details of the selected task to the modal.
+Value: The selectedTask object.
+If in edit mode, this object provides the task's current details for pre-filling fields in the modal.
+If in create mode, this might be null or an empty object.
+*/

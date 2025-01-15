@@ -98,3 +98,10 @@ const handleCloseModal = () => {
 };
 
 export default TaskCard;
+
+/* isEditMode={!!selectedTask}
+Purpose: This boolean prop indicates whether the modal is in "edit mode" or "create mode."
+Value: The result of !!selectedTask (double negation converts any truthy/falsy value to true/false).
+true if selectedTask contains a task (edit mode).
+false if selectedTask is null or undefined (create mode)
+*/

@@ -34,7 +34,7 @@ axiosInstance.interceptors.request.use(
 );
 
 // API Connector Function
-export const apiConnector = (method, url, bodyData , headers, params ) => {
+export const apiConnector = async (method, url, bodyData , headers, params ) => {
   // Merge custom headers with default ones
   const defaultHeaders = {
     'Content-Type': 'application/json', // Default to JSON content type
